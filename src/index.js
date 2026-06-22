@@ -23,7 +23,7 @@ app.use("/api/", rateLimit({ windowMs: 15 * 60 * 1000, max: 100, standardHeaders
 mongoose
   .connect(process.env.MONGODB_URI || "mongodb://localhost:27017/ecommerce")
   .then(() => console.log("[DB] MongoDB connected"))
-  .catch(err => { console.error("[DB] connection failed:", err); process.exit(1); });
+  .catch(err => { console.warn("[DB] connection failed — running in degraded mode:", err.message); });
 
 app.use("/api/auth",     authRoutes);
 app.use("/api/products", productRoutes);
